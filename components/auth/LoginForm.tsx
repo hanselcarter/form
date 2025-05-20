@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 // Define validation schema with Zod
 const loginSchema = z.object({
@@ -45,16 +46,24 @@ export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     
-    // Here you would typically handle authentication
-    // For example: await signIn(data.email, data.password)
-    
-    console.log("Login attempt with:", data);
-    
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Here you would typically handle authentication
+      // For example: await signIn(data.email, data.password)
+      
+      console.log("Login attempt with:", data);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Simulate successful login
+      toast.success("Successfully logged in");
+      // Handle redirect here
+    } catch (error) {
+      // Handle authentication error
+      toast.error(error instanceof Error ? error.message : "Failed to login. Please try again.");
+    } finally {
       setIsLoading(false);
-      // Handle successful login (e.g., redirect)
-    }, 1000);
+    }
   };
 
   return (

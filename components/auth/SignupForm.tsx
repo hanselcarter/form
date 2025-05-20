@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 // Define validation schema with Zod
 const signupSchema = z
@@ -53,16 +54,24 @@ export function SignupForm() {
   const onSubmit = async (data: SignupFormValues) => {
     setIsLoading(true);
     
-    // Here you would typically handle account creation
-    // For example: await createAccount(data.email, data.password)
-    
-    console.log("Signup attempt with:", data);
-    
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Here you would typically handle account creation
+      // For example: await createAccount(data.email, data.password)
+      
+      console.log("Signup attempt with:", data);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Simulate successful signup
+      toast.success("Account created successfully");
+      // Handle redirect here
+    } catch (error) {
+      // Handle account creation error
+      toast.error(error instanceof Error ? error.message : "Failed to create account. Please try again.");
+    } finally {
       setIsLoading(false);
-      // Handle successful signup (e.g., redirect)
-    }, 1000);
+    }
   };
 
   return (
