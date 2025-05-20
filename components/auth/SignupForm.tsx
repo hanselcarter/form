@@ -41,7 +41,7 @@ export function SignupForm() {
             placeholder="name@example.com"
             type="email"
             autoCapitalize="none"
-            autoComplete="email"
+            autoComplete="off"
             autoCorrect="off"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -51,7 +51,7 @@ export function SignupForm() {
         <div className="grid gap-2">
           <Input 
             id="password" 
-            placeholder="••••••••" 
+            placeholder="Password" 
             type="password" 
             autoCapitalize="none" 
             autoCorrect="off"
@@ -63,7 +63,7 @@ export function SignupForm() {
         <div className="grid gap-2">
           <Input 
             id="confirmPassword" 
-            placeholder="••••••••" 
+            placeholder="Confirm Password" 
             type="password" 
             autoCapitalize="none" 
             autoCorrect="off"
