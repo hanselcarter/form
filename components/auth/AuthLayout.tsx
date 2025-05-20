@@ -17,9 +17,11 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              &ldquo;This app has completely transformed how we handle our documentation and form processes. Everything is streamlined now.&rdquo;
+              &ldquo;This app has completely transformed how we handle our
+              documentation and form processes. Everything is streamlined
+              now.&rdquo;
             </p>
-            <footer className="text-sm">Sofia Davis</footer>
+            <footer className="text-sm">Rijad Dizdarevic</footer>
           </blockquote>
         </div>
       </div>
