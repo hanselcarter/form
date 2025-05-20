@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { AUTHOR_NAME } from "@/constants";
 import { BookText } from "lucide-react";
 
 interface AuthLayoutProps {
@@ -16,7 +17,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
             <p className="text-lg">
               &ldquo;This app has completely transformed how we handle our documentation and form processes. Everything is streamlined now.&rdquo;
             </p>
-            <footer className="text-sm">Rijad Dizdarevic</footer>
+            <footer className="text-sm">{AUTHOR_NAME}</footer>
           </blockquote>
         </div>
       </div>

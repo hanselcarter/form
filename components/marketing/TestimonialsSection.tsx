@@ -1,5 +1,5 @@
-// TestimonialsSection.tsx
 import React from "react";
+import { AUTHOR_NAME } from "@/constants";
 
 export default function TestimonialsSection() {
   return (
@@ -22,7 +22,9 @@ export default function TestimonialsSection() {
           <div className="flex flex-col justify-between rounded-lg border p-6 shadow-sm bg-white">
             <div className="space-y-2">
               <p className="text-slate-500">
-                &ldquo;This form app has completely transformed how we collect data. It&rsquo;s so easy to use and the analytics are incredible.&rdquo;
+                &ldquo;This form app has completely transformed how we collect
+                data. It&rsquo;s so easy to use and the analytics are
+                incredible.&rdquo;
               </p>
             </div>
             <div className="flex items-center gap-4 pt-4">
@@ -30,7 +32,7 @@ export default function TestimonialsSection() {
                 <div className="h-8 w-8 rounded-full bg-slate-200" />
               </div>
               <div>
-                <p className="text-sm font-medium">Rijad Dizdarevic</p>
+                <p className="text-sm font-medium">{AUTHOR_NAME}</p>
                 <p className="text-xs text-slate-500">Engineering Director</p>
               </div>
             </div>
@@ -38,7 +40,8 @@ export default function TestimonialsSection() {
           <div className="flex flex-col justify-between rounded-lg border p-6 shadow-sm bg-white">
             <div className="space-y-2">
               <p className="text-slate-500">
-                &ldquo;I&rsquo;ve tried many form builders, but this one stands out. The templates saved me hours of work.&rdquo;
+                &ldquo;I&rsquo;ve tried many form builders, but this one stands
+                out. The templates saved me hours of work.&rdquo;
               </p>
             </div>
             <div className="flex items-center gap-4 pt-4">
@@ -46,7 +49,7 @@ export default function TestimonialsSection() {
                 <div className="h-8 w-8 rounded-full bg-slate-200" />
               </div>
               <div>
-                <p className="text-sm font-medium">Rijad Dizdarevic</p>
+                <p className="text-sm font-medium">{AUTHOR_NAME}</p>
                 <p className="text-xs text-slate-500">Small Business Owner</p>
               </div>
             </div>
@@ -54,7 +57,8 @@ export default function TestimonialsSection() {
           <div className="flex flex-col justify-between rounded-lg border p-6 shadow-sm bg-white">
             <div className="space-y-2">
               <p className="text-slate-500">
-                &ldquo;The customer support is exceptional. Any time I&rsquo;ve had a question, they&rsquo;ve been quick to respond.&rdquo;
+                &ldquo;The customer support is exceptional. Any time I&rsquo;ve
+                had a question, they&rsquo;ve been quick to respond.&rdquo;
               </p>
             </div>
             <div className="flex items-center gap-4 pt-4">
@@ -62,7 +66,7 @@ export default function TestimonialsSection() {
                 <div className="h-8 w-8 rounded-full bg-slate-200" />
               </div>
               <div>
-                <p className="text-sm font-medium">Rijad Dizdarevic</p>
+                <p className="text-sm font-medium">{AUTHOR_NAME}</p>
                 <p className="text-xs text-slate-500">Freelance Designer</p>
               </div>
             </div>

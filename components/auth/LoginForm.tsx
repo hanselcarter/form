@@ -19,17 +19,15 @@ const loginSchema = z.object({
     })
     .refine((password) => /[0-9]/.test(password), {
       message: "Password must contain at least one number",
-    })
+    }),
 });
 
-// Infer TypeScript type from the schema
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Initialize React Hook Form with Zod validation
   const {
     register,
     handleSubmit,
@@ -45,22 +43,26 @@ export function LoginForm() {
   // Form submission handler
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
-    
+
     try {
       // Here you would typically handle authentication
       // For example: await signIn(data.email, data.password)
-      
+
       console.log("Login attempt with:", data);
-      
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Simulate successful login
       toast.success("Successfully logged in");
       // Handle redirect here
     } catch (error) {
       // Handle authentication error
-      toast.error(error instanceof Error ? error.message : "Failed to login. Please try again.");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to login. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -86,15 +88,15 @@ export function LoginForm() {
         </div>
         <div className="grid gap-2">
           <div className="relative">
-            <Input 
-              id="password" 
-              placeholder="Password" 
-              type={showPassword ? "text" : "password"} 
-              autoCapitalize="none" 
+            <Input
+              id="password"
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              autoCapitalize="none"
               autoCorrect="off"
               {...register("password")}
               aria-invalid={errors.password ? "true" : "false"}
-              className="pr-10" // Add padding for the icon
+              className="pr-10"
             />
             <button
               type="button"
