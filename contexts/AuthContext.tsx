@@ -17,6 +17,7 @@ import {
   setUser as setUserCookie,
   getUser as getUserFromCookie,
 } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: User | null;
@@ -32,6 +33,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -62,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       toast.success("Successfully logged in");
 
-      window.location.href = "/dashboard";
+      router.push("/dashboard");
       return true;
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Login failed");
@@ -84,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       toast.success("Account created successfully");
 
-      window.location.href = "/dashboard";
+      router.push("/dashboard");
       return true;
     } catch (error) {
       toast.error(
@@ -101,7 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
     toast.success("Successfully logged out");
 
-    window.location.href = "/login";
+    router.push("/login");
   };
 
   const value = {
