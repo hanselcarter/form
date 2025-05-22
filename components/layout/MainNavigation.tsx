@@ -10,7 +10,6 @@ export function MainNavigation() {
   const pathname = usePathname();
   const { user, isAuthenticated, logout } = useAuth();
 
-  // Don't show navigation on auth pages
   const authPages = ["/login", "/signup", "/forgot-password"];
   if (authPages.includes(pathname)) {
     return null;
