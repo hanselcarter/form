@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ridley - Form Builder Application
+
+This is a [Next.js](https://nextjs.org) application for creating and managing forms. It features a modern UI with authentication, protected routes, and server-side rendering capabilities.
 
 ## Live Version
 
@@ -6,7 +8,25 @@ The application is currently deployed and accessible at:
 
 **[https://dhpbb0hg9mvh1.cloudfront.net](https://dhpbb0hg9mvh1.cloudfront.net)**
 
-This deployment includes full server-side rendering capabilities.
+This deployment includes:
+- Full server-side rendering capabilities
+- API routes
+- SEO optimization
+- Secure authentication with cookie-based tokens
+
+## Features
+
+### Authentication System
+- Secure cookie-based authentication with SameSite=Strict protection
+- Login and registration functionality
+- Protected routes using Next.js middleware
+- Automatic redirection for unauthenticated users
+
+### UI/UX
+- Modern, responsive design using shadcn/ui components
+- Marketing homepage with dynamic content based on authentication status
+- Protected dashboard for authenticated users
+- Form creation and management interface
 
 ## Getting Started
 
@@ -14,19 +34,13 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a custom font family.
 
 ## Learn More
 
@@ -72,23 +86,13 @@ This guide will walk you through deploying your Next.js application on AWS with 
 npm install -g aws-cdk
 ```
 
-### Step 2: Initialize CDK in your Next.js project
+### Step 2: Understanding the CDK Setup
 
-```bash
-# Create a cdk directory in your project
-mkdir cdk
-cd cdk
+This project already includes a complete CDK configuration in the `cdk` directory. You don't need to create or initialize anything. The setup uses the `cdk-nextjs-standalone` package to deploy the Next.js application with full server-side rendering capabilities.
 
-# Initialize a new CDK project
-cdk init app --language typescript
+### Step 3: Review the CDK Stack
 
-# Install required dependencies
-npm install cdk-nextjs-standalone
-```
-
-### Step 3: Configure your CDK Stack
-
-Create or modify the file `cdk/lib/cdk-stack.ts` with the following content:
+The CDK stack is already configured in `cdk/lib/cdk-stack.ts`. Here's what it does:
 
 ```typescript
 import * as cdk from "aws-cdk-lib";
@@ -115,9 +119,9 @@ export class CdkStack extends cdk.Stack {
 }
 ```
 
-### Step 4: Configure your CDK App
+### Step 4: Review the CDK App Configuration
 
-Update the file `cdk/bin/cdk.ts` with the following content:
+The CDK app is already configured in `cdk/bin/cdk.ts`. This file sets up the stack with the appropriate AWS region and tags:
 
 ```typescript
 #!/usr/bin/env node
@@ -137,9 +141,9 @@ new CdkStack(app, "RidleyFrontendStack", {
 });
 ```
 
-### Step 5: Update your Next.js Configuration
+### Step 5: Next.js Configuration
 
-Ensure your `next.config.ts` or `next.config.js` is configured for server-side rendering:
+The project already has the appropriate Next.js configuration in `next.config.js` for server-side rendering:
 
 ```typescript
 import type { NextConfig } from "next";
@@ -154,29 +158,43 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 ```
 
-### Step 6: Update .gitignore
+### Step 6: .gitignore Configuration
 
-Add the following to your `.gitignore` file to exclude build artifacts:
+The project already has the necessary entries in the `.gitignore` file to exclude CDK-generated files:
 
 ```
 # CDK and deployment artifacts
 .open-next
 cdk.out/
+.next
+node_modules
 ```
 
-### Step 7: Build and Deploy
+### Step 7: Bootstrap AWS CDK (First-time only)
+
+If this is your first time using AWS CDK in your AWS account and region, you need to bootstrap it once:
 
 ```bash
-# Build your Next.js application
-npm run build
-
-# Deploy with CDK
-cd cdk && npx cdk deploy
+cdk bootstrap
 ```
+
+### Step 8: Build and Deploy
+
+We've simplified the deployment process with a single command:
+
+```bash
+# Build and deploy in one step
+npm run deploy
+```
+
+This command will:
+1. Build your Next.js application
+2. Navigate to the CDK directory
+3. Deploy with CDK
 
 When prompted to approve the CloudFormation changes, type 'y' to confirm.
 
-### Step 8: Access Your Deployed Application
+### Step 9: Access Your Deployed Application
 
 After deployment completes (which may take 10-15 minutes for the first deployment), you'll see a CloudFront URL in the terminal output. This is your deployed application URL.
 
@@ -186,6 +204,24 @@ Example output:
 Outputs:
 RidleyFrontendStack.CloudFrontDistributionDomain = d123abc456def.cloudfront.net
 ```
+
+### Step 10: Configure API Endpoint
+
+Important: If you're deploying your own version of this application, you'll need to update the API endpoint in `constants/index.ts`:
+
+```typescript
+export const API_BASE_URL = "https://your-api-endpoint.amazonaws.com/prod";
+```
+
+The current API endpoint is configured for the original deployment. You'll need to replace it with your own API endpoint URL if you're setting up your own backend.
+
+**Note:** For production applications, it's best practice to store the backend API URL in environment variables rather than hardcoding it in the constants file. This approach was chosen for simplicity in this demo, but for your own deployments, consider using environment variables like:
+
+```typescript
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+```
+
+You can then set the `NEXT_PUBLIC_API_URL` environment variable in your deployment environment.
 
 ### Updating Your Deployment
 
