@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
-import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 
 const signupSchema = z
   .object({
@@ -47,29 +47,23 @@ export function SignupForm() {
     },
   });
 
+  // Get authentication functions from our custom hook
+  const { register: registerUser } = useAuth();
+
   // Form submission handler
   const onSubmit = async (data: SignupFormValues) => {
     setIsLoading(true);
 
     try {
-      // Here you would typically handle account creation
-      // For example: await createAccount(data.email, data.password)
-
-      console.log("Signup attempt with:", data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Simulate successful signup
-      toast.success("Account created successfully");
-      // Handle redirect here
+      // Call our register function from the auth hook
+      await registerUser({
+        email: data.email,
+        password: data.password,
+      });
+      // The hook handles success messages and redirects
     } catch (error) {
-      // Handle account creation error
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Failed to create account. Please try again."
-      );
+      // The hook handles error messages, but we can add additional handling here if needed
+      console.error("Registration error:", error);
     } finally {
       setIsLoading(false);
     }

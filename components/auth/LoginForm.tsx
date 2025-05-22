@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
-import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Define validation schema with Zod
 const loginSchema = z.object({
@@ -40,29 +40,23 @@ export function LoginForm() {
     },
   });
 
+  // Get authentication functions from our custom hook
+  const { login } = useAuth();
+
   // Form submission handler
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
 
     try {
-      // Here you would typically handle authentication
-      // For example: await signIn(data.email, data.password)
-
-      console.log("Login attempt with:", data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Simulate successful login
-      toast.success("Successfully logged in");
-      // Handle redirect here
+      // Call our login function from the auth hook
+      await login({
+        email: data.email,
+        password: data.password,
+      });
+      // The hook handles success messages and redirects
     } catch (error) {
-      // Handle authentication error
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Failed to login. Please try again."
-      );
+      // The hook handles error messages, but we can add additional handling here if needed
+      console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
